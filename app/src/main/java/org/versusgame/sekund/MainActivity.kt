@@ -6,8 +6,8 @@ import android.os.CountDownTimer
 import kotlinx.android.synthetic.main.activity_main.*
 
 lateinit var timer: CountDownTimer
-var vaqt: Long = 55000
-var pau: Long = 55000
+var vaqt: Long = 55
+var pau: Long = 55
 var son=0
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,30 +17,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun time(aa: Long) {
-        timer = object : CountDownTimer(vaqt, 1000) {
+        timer = object : CountDownTimer(aa*1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                pau -= 1000
+                pau -= 1
                 sekund.text = pau.toString()
             }
-
             override fun onFinish() {
             }
-        }
-        timer.start()
+        }.start()
     }
 
 var m= "-marta"
     override fun onPause() {
         timer.cancel()
-        vaqt = pau
         son++
         pus.text ="${son.toString() + m }"
         super.onPause()
     }
 
-    override fun onResume() {
-        timer.start()
-        super.onResume()
+    override fun onRestart() {
+        time(pau)
+        super.onRestart()
     }
 
 }
